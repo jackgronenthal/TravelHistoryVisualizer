@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+        
+    @State private var isDestinationPagePresented = false
     
     //@State var tab = Tab.home
     @State var toolbar = Button(action: {print("touched")}) { Image(systemName: "plus.circle") }
@@ -25,9 +27,9 @@ struct ContentView: View {
         NavigationView {
             TabView(selection: $s_utils.tab) {
                 
-                LocalLocationSearchServiceView().tabItem {
-                    Label(Tab.destinations.rawValue.capitalized, systemImage: "airplane")
-                }.tag(Tab.destinations).onAppear { gs.dispatch(.Paginate, ContentView.Tab.destinations) }
+//                LocalLocationSearchServiceView().tabItem {
+//                    Label(Tab.destinations.rawValue.capitalized, systemImage: "airplane")
+//                }.tag(Tab.destinations).onAppear { gs.dispatch(.Paginate, ContentView.Tab.destinations) }
                 
                 SplashView().tabItem {
                     Label(Tab.home.rawValue.capitalized, systemImage: "star.fill")
@@ -36,7 +38,10 @@ struct ContentView: View {
             }
             .font(.headline)
             .navigationTitle($s_utils.tab.wrappedValue.rawValue.capitalized)
-            .toolbar { $s_utils.tabContent.wrappedValue }
+            .toolbar { Button(action: { print(gs.dispatch(.ToggleDestinationModal, true)) }) {
+                Image(systemName: "plus")
+            }}
+            .fullScreenCover(isPresented: $s_utils.isDestinationPagePresented, onDismiss: {}, content: LocalLocationSearchServiceView.init)
         }
     }
 }

@@ -27,6 +27,7 @@
 		D19B3F0F2957FCDE005C0774 /* DestinationDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B3F0E2957FCDD005C0774 /* DestinationDataView.swift */; };
 		D19B3F11295801F3005C0774 /* UtilsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B3F10295801F3005C0774 /* UtilsViewModel.swift */; };
 		D19B3F13295924F8005C0774 /* AddDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B3F12295924F7005C0774 /* AddDestinationView.swift */; };
+		D19B3F1529595BE8005C0774 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19B3F1429595BE8005C0774 /* SearchBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		D19B3F0E2957FCDD005C0774 /* DestinationDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDataView.swift; sourceTree = "<group>"; };
 		D19B3F10295801F3005C0774 /* UtilsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsViewModel.swift; sourceTree = "<group>"; };
 		D19B3F12295924F7005C0774 /* AddDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDestinationView.swift; sourceTree = "<group>"; };
+		D19B3F1429595BE8005C0774 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,11 +163,11 @@
 			isa = PBXGroup;
 			children = (
 				D19B3EFB29579BEA005C0774 /* view-model */,
-				D19B3EEF295790F6005C0774 /* model.swift */,
 				D19B3EF12957912F005C0774 /* actions.swift */,
+				D19B3F032957AED3005C0774 /* dispatcher.swift */,
+				D19B3EEF295790F6005C0774 /* model.swift */,
 				D19B3EF32957917A005C0774 /* reducers.swift */,
 				D19B3EF5295791D5005C0774 /* payload.swift */,
-				D19B3F032957AED3005C0774 /* dispatcher.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -210,6 +212,7 @@
 				D19B3F0A2957C338005C0774 /* SplashView.swift */,
 				D19B3F0C2957C6EB005C0774 /* ParallaxHeaderView.swift */,
 				D19B3F12295924F7005C0774 /* AddDestinationView.swift */,
+				D19B3F1429595BE8005C0774 /* SearchBarView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				D19B3F0B2957C338005C0774 /* SplashView.swift in Sources */,
 				D19B3EF42957917A005C0774 /* reducers.swift in Sources */,
 				D19B3EF22957912F005C0774 /* actions.swift in Sources */,
+				D19B3F1529595BE8005C0774 /* SearchBarView.swift in Sources */,
 				D19B3EFD29579C28005C0774 /* LocalLocationSearchServiceViewModel.swift in Sources */,
 				D19B3EF0295790F6005C0774 /* model.swift in Sources */,
 				D19B3F11295801F3005C0774 /* UtilsViewModel.swift in Sources */,

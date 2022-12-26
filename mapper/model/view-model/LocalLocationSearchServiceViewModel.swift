@@ -19,8 +19,11 @@ final class LocalLocationSearchServiceViewModel: Store, ObservableObject {
     @Published var iataCode = String()
     @Published var viewData = [LocalSearchViewData]()
     @Published var destinationData = [DestinationViewData]()
+    @Published var isPresentedAddDestinationSheet = false
     
-    private let toolbar = Button(action: { print("clicked") }) { Image(systemName: "plus") }
+    public static let toolbar = Button(action: { print(gs.dispatch(.ToggleDestinationModal, nil)) }) {
+        Text("Done")
+    }
     
     init() {
         service = LocalSearchService(in: LocalLocationSearchServiceTestData.localLocationSearchServiceTestData[.NewYork]!)
@@ -35,13 +38,16 @@ final class LocalLocationSearchServiceViewModel: Store, ObservableObject {
     
     /// Sets the content within the NavigationView toolbar that is specific to the LocalLocationSearchService page.
     private func setNavigationViewToolBar() {
-        gs.dispatchWithPayloadAndReducer(.SetNavigationViewToolBar, toolbar, .Utils)
+        gs.dispatchWithPayloadAndReducer(.SetNavigationViewToolBar, LocalLocationSearchServiceViewModel.toolbar, .Utils)
     }
+    
+    private func toggleAddDestinationSheet(isPresented:Bool) { isPresentedAddDestinationSheet = isPresented }
     
     func reduce(_ details: ActionDetails) {
         switch(details.action) {
         case .SubmitLocationSearchServiceQuery: searchIATACode()
         case .SetNavigationViewToolBar: setNavigationViewToolBar()
+        case .ToggleAddDestinationSheet: toggleAddDestinationSheet(isPresented: details.payload as! Bool)
         default: print("No action enumerated in LocationService")
         }
         return

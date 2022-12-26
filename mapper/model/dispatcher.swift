@@ -29,17 +29,19 @@ class Dispatcher {
             expectedTypes = [String.self]
             typesValid = verify(string: payload)
             break
-        case .SubmitLocationSearchServiceQuery:
-            expectedTypes = [Bool.self]
-            typesValid = verify(bool: payload)
-            break
         case .Paginate:
             expectedTypes = [String.self]
             typesValid = verify(string: (payload as? ContentView.Tab)?.rawValue)
             break
         case .SetNavigationViewToolBar:
-            typesValid = true;
-            // FIXME
+            typesValid = true
+            break
+        case .SubmitLocationSearchServiceQuery: fallthrough // FIXME
+        case .ToggleAddDestinationSheet: fallthrough
+        case .ToggleDestinationModal:
+            expectedTypes = [Bool.self]
+            typesValid = verify(bool: payload)
+            break
         default:
             throw PayloadError.insufficientCoverage(coverless: action)
         }
@@ -85,10 +87,12 @@ class Dispatcher {
         switch action {
         
         // LocationSearchService
+        case .ToggleAddDestinationSheet: fallthrough
         case .SubmitLocationSearchServiceQuery: fallthrough
         case .SetLocationSearchServiceQuery: details.set(reducer: .LocationSearchService); break;
         
         // Utils
+        case .ToggleDestinationModal: fallthrough
         case .SetNavigationViewToolBar: fallthrough
         case .Paginate: details.set(reducer: .Utils); break;
             

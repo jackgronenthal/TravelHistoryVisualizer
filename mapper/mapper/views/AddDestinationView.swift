@@ -7,23 +7,55 @@
 
 import SwiftUI
 
-struct AddDestinationSheetview: View {
+struct AddDestinationSheetView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    
+    init() {
+        UINavigationBar.appearance().backgroundColor = .tertiarySystemBackground
+    }
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Divider().padding(.bottom)
+                SearchBarView(header: "Location")
+                    .navigationTitle("Add Destination")
+                    .navigationBarTitleDisplayMode(.inline)
+                Spacer()
+            }
+        }
+    }
+}
+
+struct AddDestinationButtonView: View {
+    
+    @ObservedObject private var s_locationSearchService = gs.locationSearchService()
     
     var body: some View {
         VStack {
-            Text("Add a destination.").foregroundColor(Color(UIColor.secondaryLabel)).frame(maxWidth: .infinity, alignment: .topLeading)
+            Text("Add locations of travel.").foregroundColor(Color(UIColor.secondaryLabel)).frame(maxWidth: .infinity, alignment: .topLeading)
                 .padding(.horizontal)
             AddDestinationButton()
             Spacer()
         }.background(Color(UIColor.secondarySystemBackground))
+            .onTapGesture {
+                gs.dispatch(.ToggleAddDestinationSheet, true)
+            }
+            .sheet(isPresented: $s_locationSearchService.isPresentedAddDestinationSheet, onDismiss: {
+                UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.secondaryLabel]
+            }) { AddDestinationSheetView() }
     }
 }
 
 struct AddDestinationSheetview_Previews: PreviewProvider {
+    
+    @State static var showAddDestinationSheet = gs.locationSearchService()
+    
     static var previews: some View {
-        AddDestinationSheetview()
+        AddDestinationButtonView()
         Group {
-            AddDestinationSheetview().preferredColorScheme(.dark)
+            AddDestinationButtonView().preferredColorScheme(.dark)
         }
     }
 }

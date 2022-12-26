@@ -10,47 +10,33 @@ import Foundation
 import SwiftUI
 
 struct LocalLocationSearchServiceView: View {
-    
+        
     @ObservedObject private var s_locationSearchService = gs.locationSearchService()
     @ObservedObject private var s_utils = gs.utils()
 
-    private var toolbar : some View {
-        toolbar {
-            Button("Add") {}
-        }
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.secondaryLabel]
     }
     
     var body: some View {
-        VStack {
-            AddDestinationSheetview()
-//            List(self.$s_locationSearchService.destinationData.indices, id: \.self) { index in
-//                Text(self.s_locationSearchService.destinationData[index].title)
-//            }
+        NavigationView {
+            VStack {
+                AddDestinationButtonView()
+            }
+            .onAppear {
+                gs.dispatch(.Paginate, ContentView.Tab.destinations)
+            }
+            .navigationTitle("Unnamed Travel")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { Button(action: { gs.dispatch(.ToggleDestinationModal, false) }) {
+                Text("**Done**")
+            } }
         }
-            
-        //        VStack(alignment: .leading) {
-//            TextField("Enter Location", text: self.$s_locationSearchService.iataCode)
-//                .onSubmit {
-//                    gs.dispatch(.SubmitLocationSearchServiceQuery, true)
-//                }
-//            Divider()
-//            Text("Results").font(.title)
-//            List {
-//                ForEach(self.$s_locationSearchService.viewData.indices, id: \.self) { index in
-//                    VStack(alignment: .leading) {
-//                        Text(self.s_locationSearchService.viewData[index].title)
-//                    }
-//                }
-//            }
-//        }
-//        .padding(.horizontal)
-//        .padding(.top)
     }
 }
 
 struct LocalLocationSearchServiceView_Previews: PreviewProvider {
-//    @State static var tab : ContentView.Tab = .destinations
     static var previews: some View {
-        ContentView()
+        LocalLocationSearchServiceView()
     }
 }

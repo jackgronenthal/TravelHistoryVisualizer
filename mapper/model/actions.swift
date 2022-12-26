@@ -12,6 +12,8 @@ enum Action {
     case SubmitLocationSearchServiceQuery
     case SetLocationSearchServiceQuery
     case SetNavigationViewToolBar
+    case ToggleDestinationModal
+    case ToggleAddDestinationSheet
     
     // App Utils
     case Paginate
